@@ -22,12 +22,12 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "8"
+          java-version: "17"
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install SDK and NDK
+      - name: Install Android SDK and NDK
         run: |
           sdkmanager --install \
             "platform-tools" \
@@ -35,7 +35,7 @@ jobs:
             "build-tools;30.0.3" \
             "ndk;21.4.7075529"
 
-      - name: Set up Gradle
+      - name: Grant Gradle permission
         run: chmod +x ./gradlew
 
       - name: Build APK
@@ -47,4 +47,4 @@ jobs:
           name: Android-APK
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
-          
+  
