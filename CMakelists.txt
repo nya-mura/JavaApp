@@ -1,0 +1,69 @@
+
+cmake_minimum_required(VERSION 3.22.1)
+
+project(viscount)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_C_FLAGS
+    "${CMAKE_C_FLAGS} -w -fvisibility=hidden -fexceptions"
+)
+
+set(CMAKE_CXX_FLAGS
+    "${CMAKE_CXX_FLAGS} -w -fvisibility=hidden -fexceptions -fpermissive -Wno-error=c++11-narrowing"
+)
+
+add_library(dobby STATIC IMPORTED)
+
+set_target_properties(dobby PROPERTIES
+    IMPORTED_LOCATION
+    "${CMAKE_CURRENT_SOURCE_DIR}/libraries/${ANDROID_ABI}/libdobby.a"
+)
+
+add_library(viscount SHARED
+
+    main.cpp
+
+    # ImGui
+    ImGui/imgui.cpp
+    ImGui/imgui_draw.cpp
+    ImGui/imgui_widgets.cpp
+    ImGui/imgui_tables.cpp
+    ImGui/backends/imgui_impl_opengl3.cpp
+    ImGui/backends/imgui_impl_android.cpp
+
+    # Substrate
+    Substrate/SubstrateDebug.cpp
+    Substrate/SubstrateHook.cpp
+    Substrate/SubstratePosixMemory.cpp
+
+    # KittyMemory
+    KittyMemory/KittyMemory.cpp
+    KittyMemory/MemoryPatch.cpp
+    KittyMemory/MemoryBackup.cpp
+    KittyMemory/KittyUtils.cpp
+
+    # And64InlineHook
+    And64InlineHook/And64InlineHook.cpp
+
+
+)
+
+target_include_directories(viscount PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Includes
+    ${CMAKE_CURRENT_SOURCE_DIR}/ImGui
+    ${CMAKE_CURRENT_SOURCE_DIR}/ImGui/backends
+)
+
+target_link_libraries(viscount
+    dobby
+    log
+    z
+    android
+    EGL
+    GLESv2
+    dl
+)
+
