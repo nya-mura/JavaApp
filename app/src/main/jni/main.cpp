@@ -89,7 +89,7 @@ Java_com_mycompany_application_GLES3JNIView_init(JNIEnv* env, jclass cls) {
     int screenHeight = io.DisplaySize.y;
   
     ImGui_ImplOpenGL3_Init("#version 100");
-    ImGui::StyleColorsClassic();
+    ImGui::StyleColorsDark();
     ImGui::GetStyle().ScaleAllSizes(3.0f);
     
 	
