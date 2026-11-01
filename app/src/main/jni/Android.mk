@@ -29,7 +29,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_STATIC_LIBRARIES := libdobby
 
 
-LOCAL_SRC_FILES := working.cpp \
+LOCAL_SRC_FILES := main.cpp \
 	ImGui/imgui.cpp \
     ImGui/imgui_draw.cpp \
     ImGui/imgui_widgets.cpp \
