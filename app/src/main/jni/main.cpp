@@ -148,9 +148,10 @@ Java_com_mycompany_application_GLES3JNIView_step(JNIEnv* env, jobject obj) {
 
     ImGui::Begin("JAVA IMGUI [x32/64]");
         ImGui::Text("Counter Flame");
-    
-    
-
+    g_window = ImGui::GetCurrentWindow();
+        g_window = ImGui::GetCurrentWindow();
+        
+    ImGui::End(); 
 
     ImGui::EndFrame();
     
